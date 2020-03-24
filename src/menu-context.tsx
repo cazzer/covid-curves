@@ -12,7 +12,7 @@ export const MenuContext = createContext({} as ContextType)
 
 export const Provider = props => {
   const [ query, setQuery ] = useState('')
-  const [ scale, setScale ] = useState('even' as scale)
+  const [ scale, setScale ] = useState('fit' as scale)
 
   function toggleScale() {
     setScale(scale === 'fit' ? 'even' : 'fit')
