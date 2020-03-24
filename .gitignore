@@ -1,0 +1,5 @@
+*.log
+*.error
+/node_modules/
+.cache
+/dist/
