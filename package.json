@@ -32,6 +32,6 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --out-dir docs"
+    "build": "parcel build src/index.html --out-dir docs --public-url https://cazzer.github.io/covid-curves/"
   }
 }

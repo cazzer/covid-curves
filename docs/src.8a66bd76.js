@@ -1648,4 +1648,4 @@ function r(){return module.exports=r=Object.assign||function(r){for(var t=1;t<ar
 },{"react":"n8MK","@material-ui/core/styles":"UUDD","@material-ui/core/Typography":"pi2F","@material-ui/core/Grid":"xZhg","./chart-view":"wrLm","./data/covid-daily-data":"tEZz","./menu":"bqp7","./menu-context":"g8pG","./state-map":"Qrri"}],"zo2T":[function(require,module,exports) {
 "use strict";var e=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(exports,"__esModule",{value:!0});var t=e(require("react")),r=e(require("react-dom")),u=e(require("./app"));module.hot&&module.hot.accept(),r.default.render(t.default.createElement(u.default,null),document.getElementById("app"));
 },{"react":"n8MK","react-dom":"NKHc","./app":"owv9"}]},{},["zo2T"], null)
-//# sourceMappingURL=/src.8a66bd76.js.map
+//# sourceMappingURL=https://cazzer.github.io/covid-curves/src.8a66bd76.js.map
