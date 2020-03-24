@@ -31,7 +31,7 @@ export default function ChartView(props: {
   const { query, scale } = useContext(MenuContext)
 
   let renderedStates = props.data.states.sort((a, b) => (
-    (a.latest.total || 0) > (b.latest.total || 0) ? -1 : 1
+    (a.latest.positive || 0) > (b.latest.positive || 0) ? -1 : 1
   ))
 
   if (query) {
