@@ -36,7 +36,8 @@ export default function ChartView(props: {
 
   if (query) {
     renderedStates = renderedStates.filter(state => (
-      state.key.toLowerCase().match(query) || state.name.toLowerCase().match(query)
+      state.key.toLowerCase().match(query.toLowerCase())
+      || state.name.toLowerCase().match(query.toLowerCase())
     ))
   } else {
     renderedStates = renderedStates.filter((state, index) => index < 12)
