@@ -1,6 +1,10 @@
 # COVID-19 Curve
 > A visual exploration of the scariest waves yet.
 
+## Run it locally
+1. `yarn`
+2. `yarn start`
+
 ## Sources
 All data used in this visualization is from [The COVID Tracking Project](https://covidtracking.com/). It is solely focused on US States for now, but will ideally expand to all affected areas.
 
