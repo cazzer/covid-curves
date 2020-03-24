@@ -14,7 +14,7 @@ export const Provider = props => {
   const [ query, setQuery ] = useState('')
   const [ scale, setScale ] = useState('even' as scale)
 
-  function toggleScale {
+  function toggleScale() {
     setScale(scale === 'fit' ? 'even' : 'fit')
   }
 
