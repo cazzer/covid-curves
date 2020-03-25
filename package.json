@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --out-dir docs --public-url https://cazzer.github.io/covid-curves/"
+    "build": "parcel build src/index.html --out-dir docs --public-url https://cazzer.github.io/covid-curves/",
+    "build-data": "make build-daily-data-file"
   }
 }
