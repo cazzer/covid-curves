@@ -77,6 +77,7 @@ export default function ChartView(props: {
                 stroke="#D62246"
                 fill="#D62246"
                 type="monotone"
+                name="Deaths"
               />
               <Area
                 dataKey="positive"
@@ -85,6 +86,7 @@ export default function ChartView(props: {
                 stroke="#4B1D3F"
                 fill="#4B1D3F"
                 type="monotone"
+                name="Positive Cases"
               />
               <Area
                 dataKey="negative"
@@ -93,6 +95,7 @@ export default function ChartView(props: {
                 stroke="#17BEBB"
                 fill="#17BEBB"
                 type="monotone"
+                name="Negative Results"
               />
               <Tooltip />
               <Legend />
