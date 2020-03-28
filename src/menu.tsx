@@ -99,6 +99,7 @@ function Search() {
       }}
       inputProps={{ 'aria-label': 'search' }}
       onChange={handleChange}
+      fullWidth
       value={query}
     />
   )
