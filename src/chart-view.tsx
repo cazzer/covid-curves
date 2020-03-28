@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+function formatPopulation(number: number) {
+  return `${(number / 1000000).toFixed(1)} million`
+}
+
 export default function ChartView(props: {
   data: FormattedData
 }) {
@@ -31,7 +35,7 @@ export default function ChartView(props: {
   const { query, scale } = useContext(MenuContext)
 
   let renderedStates = props.data.states.sort((a, b) => (
-    (a.latest.positive || 0) > (b.latest.positive || 0) ? -1 : 1
+    (a.percentageInfected || 0) > (b.percentageInfected || 0) ? -1 : 1
   ))
 
   if (query) {
@@ -52,7 +56,7 @@ export default function ChartView(props: {
           <Typography variant="h3">{data.name}</Typography>
           {data.latest.positive && data.latest.total ? (
             <Typography variant="caption">
-              Out of the {data.latest.total} people tested, {(data.latest.positive / data.latest.total * 100).toFixed(2)}% were positive.
+              Out of the {data.latest.total} people tested, {(data.latest.positive / data.latest.total * 100).toFixed(2)}% were positive. At this point, {data.percentageInfected.toFixed(2) }% of {data.name}'s population has contracted Covid-19, (based on a population of {formatPopulation(data.population)} according to the {data.populationCensusYear || 2020} census).
             </Typography>
           ) : (
             <Typography variant="caption">

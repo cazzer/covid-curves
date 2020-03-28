@@ -24,6 +24,10 @@ interface RawStateData {
 interface StateData {
   key: string
   name: string
+  population: number
+  populationCensusYear: number
+  percentageInfected: number
+  hospitalBeds: number
   latest: RawStateData
   values: Array<RawStateData>
 }
@@ -39,14 +43,16 @@ function formatData(data: Array<RawStateData>): FormattedData {
 
   data.reverse()
 
-  data.forEach(datum => {
+  data.forEach((datum: RawStateData) => {
     if (!states[datum.state]) {
       states[datum.state] = {
         key: datum.state,
         // @ts-ignore
-        name: stateMap[datum.state],
+        ...stateMap[datum.state],
         latest: datum,
-        values: []
+        values: [],
+        // @ts-ignore
+        percentageInfected: datum.positive / stateMap[datum.state].population * 100
       }
     }
 
@@ -61,6 +67,7 @@ function formatData(data: Array<RawStateData>): FormattedData {
 
     if ((datum.total || 0) > states[datum.state].latest.total) {
       states[datum.state].latest = datum
+      states[datum.state].percentageInfected = datum.positive / stateMap[datum.state].population * 100
     }
 
     maxTotal = total > maxTotal ? total : maxTotal
@@ -92,7 +99,7 @@ function Footer() {
   return (
     <Grid container className={classes.footer}>
       <Typography className={classes.footerText}>
-        Source data from <a className={classes.footerText} href="https://covidtracking.com/" target="_blank">The COVID Tracking Project</a>
+        Source data from <a className={classes.footerText} href="https://covidtracking.com/" target="_blank">The COVID Tracking Project</a>, <a className={classes.footerText} href="https://www.kff.org/">KFF</a>
       </Typography>
     </Grid>
   )
