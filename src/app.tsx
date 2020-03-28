@@ -9,33 +9,8 @@ import Menu from './menu'
 import { Provider } from './menu-context'
 import stateMap from './state-map'
 
-interface RawStateData {
-  date: number | string
-  state: string
-  positive: number
-  negative: number | null
-  pending: number | null
-  hospitalized: number | null
-  death: number | null
-  total: number | null
-  dateChecked: string
-}
+import { RawStateData, FormattedData } from './typings'
 
-interface StateData {
-  key: string
-  name: string
-  population: number
-  populationCensusYear: number
-  percentageInfected: number
-  hospitalBeds: number
-  latest: RawStateData
-  values: Array<RawStateData>
-}
-
-export interface FormattedData {
-  maxTotal: number
-  states: Array<StateData>
-}
 
 function formatData(data: Array<RawStateData>): FormattedData {
   const states: any = {}
@@ -67,6 +42,7 @@ function formatData(data: Array<RawStateData>): FormattedData {
 
     if ((datum.total || 0) > states[datum.state].latest.total) {
       states[datum.state].latest = datum
+      // @ts-ignore
       states[datum.state].percentageInfected = datum.positive / stateMap[datum.state].population * 100
     }
 

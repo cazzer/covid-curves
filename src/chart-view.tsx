@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import {
   ResponsiveContainer,
-  AreaChart,
+  ReferenceLine,
+  ComposedChart,
   XAxis,
   YAxis,
   Tooltip,
@@ -12,8 +13,9 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 
-import { FormattedData } from './app'
+import { FormattedData, StateData } from './typings'
 import { MenuContext } from './menu-context'
+import { COLORS } from './config'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,12 +53,12 @@ export default function ChartView(props: {
     <Grid container className={classes.grid}>
       {renderedStates
         .filter((state, index) => (index < 10))
-        .map(data => (
+        .map((data: StateData) => (
         <Grid item key={data.key} xs={12} md={6}>
           <Typography variant="h3">{data.name}</Typography>
           {data.latest.positive && data.latest.total ? (
             <Typography variant="caption">
-              Out of the {data.latest.total} people tested, {(data.latest.positive / data.latest.total * 100).toFixed(2)}% were positive. At this point, {data.percentageInfected.toFixed(2) }% of {data.name}'s population has contracted Covid-19, (based on a population of {formatPopulation(data.population)} according to the {data.populationCensusYear || 2020} census).
+              Out of the {data.latest.total} people tested, {(data.latest.positive / data.latest.total * 100).toFixed(2)}% were positive. At this point, {data.percentageInfected.toFixed(2) }% of {data.name}'s population has contracted Covid-19, (based on a population of {formatPopulation(data.population)} according to the {data.populationCensusYear || 2020} census). {data.hospitalBeds && data.latest.hospitalized && `${(data.latest.hospitalized / data.hospitalBeds * 100).toFixed(2)}% of the estimated ${data.hospitalBeds} hospital beds are needed for Covid-19 patients.`}
             </Typography>
           ) : (
             <Typography variant="caption">
@@ -64,10 +66,13 @@ export default function ChartView(props: {
             </Typography>
           )}
           <ResponsiveContainer width="100%" height={250}>
-            <AreaChart
+            <ComposedChart
               data={data.values}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
+              {data.hospitalBeds && (
+                <ReferenceLine y={data.hospitalBeds} stroke={COLORS.PENDING} label="Total est. hospital beds" />
+              )}
               <XAxis dataKey="date" />
               <YAxis
                 domain={[0, scale === 'even' ? props.data.maxTotal : 'dataMax']}
@@ -78,17 +83,26 @@ export default function ChartView(props: {
                 dataKey="death"
                 isAnimationActive={false}
                 stackId="total"
-                stroke="#D62246"
-                fill="#D62246"
+                stroke={COLORS.DEATHS}
+                fill={COLORS.DEATHS}
                 type="monotone"
                 name="Deaths"
+              />
+              <Area
+                dataKey="hospitalized"
+                isAnimationActive={false}
+                stackId="total"
+                stroke={COLORS.HOSPITALIZED}
+                fill={COLORS.HOSPITALIZED}
+                type="monotone"
+                name="Hospitalized"
               />
               <Area
                 dataKey="positive"
                 isAnimationActive={false}
                 stackId="total"
-                stroke="#4B1D3F"
-                fill="#4B1D3F"
+                stroke={COLORS.POSITIVE}
+                fill={COLORS.POSITIVE}
                 type="monotone"
                 name="Positive Cases"
               />
@@ -96,14 +110,14 @@ export default function ChartView(props: {
                 dataKey="negative"
                 isAnimationActive={false}
                 stackId="total"
-                stroke="#17BEBB"
-                fill="#17BEBB"
+                stroke={COLORS.NEGATIVE}
+                fill={COLORS.NEGATIVE}
                 type="monotone"
                 name="Negative Results"
               />
               <Tooltip />
               <Legend />
-            </AreaChart>
+            </ComposedChart>
           </ResponsiveContainer>
         </Grid>
       ))}

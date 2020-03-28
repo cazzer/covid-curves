@@ -1,0 +1,7 @@
+export const COLORS = {
+  DEATHS: '#EF8275',
+  HOSPITALIZED: '#8A4F7D',
+  POSITIVE: '#887880',
+  PENDING: '#BBAB8B',
+  NEGATIVE: '#88A096'
+}
