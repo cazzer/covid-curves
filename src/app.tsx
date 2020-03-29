@@ -2,6 +2,9 @@ import React from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import {
+  BrowserRouter as Router
+} from 'react-router-dom'
 
 import ChartView from './chart-view'
 import covidData from './data/covid-daily-data'
@@ -84,11 +87,13 @@ function Footer() {
 function App() {
   const formattedData = formatData(covidData)
   return (
-    <Provider>
-      <Menu />
-      <ChartView data={formattedData} />
-      <Footer />
-    </Provider>
+    <Router>
+      <Provider>
+        <Menu />
+        <ChartView data={formattedData} />
+        <Footer />
+      </Provider>
+    </Router>
   )
 }
 
