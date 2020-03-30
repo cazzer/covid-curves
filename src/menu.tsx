@@ -11,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase'
 import SettingsOverscan from '@material-ui/icons/SettingsOverscan'
 import SearchIcon from '@material-ui/icons/Search'
 import GithubIcon from '@material-ui/icons/Github'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { MenuContext } from './menu-context'
 
@@ -84,10 +85,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Search() {
   const classes = useStyles({})
-  const { query, setQuery } = useContext(MenuContext)
+  const location = useLocation()
+  const history = useHistory()
+  const queryString = location.search.match(/q=(.*)/)
+
 
   const handleChange = (event: any) => {
-    setQuery(event.target.value)
+    history.replace({
+      pathname: location.pathname,
+      search: event.target.value
+        ? `?q=${event.target.value}`
+        : ''
+    })
   }
 
   return (
@@ -100,7 +109,7 @@ function Search() {
       inputProps={{ 'aria-label': 'search' }}
       onChange={handleChange}
       fullWidth
-      value={query}
+      value={queryString ? queryString[1] : ''}
     />
   )
 }

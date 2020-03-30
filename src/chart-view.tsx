@@ -12,6 +12,7 @@ import {
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { useLocation } from 'react-router-dom'
 
 import { FormattedData, StateData } from './typings'
 import { MenuContext } from './menu-context'
@@ -34,7 +35,10 @@ export default function ChartView(props: {
   data: FormattedData
 }) {
   const classes = useStyles({})
-  const { query, scale } = useContext(MenuContext)
+  const { scale } = useContext(MenuContext)
+  const location = useLocation()
+  const queryString = location.search.match(/q=(.*)/)
+  const query = queryString ? queryString[1] : ''
 
   let renderedStates = props.data.states.sort((a, b) => (
     (a.percentageInfected || 0) > (b.percentageInfected || 0) ? -1 : 1
@@ -55,7 +59,14 @@ export default function ChartView(props: {
         .filter((state, index) => (index < 10))
         .map((data: StateData) => (
         <Grid item key={data.key} xs={12} md={6}>
-          <Typography variant="h3">{data.name}</Typography>
+          <div>
+            <Typography variant="h3">{data.name}</Typography>
+            {(data.latest.positiveIncrease && data.latest.hospitalizedIncrease) ? (
+              <Typography>
+                +{data.latest.positiveIncrease} new cases per day, +{data.latest.hospitalizedIncrease} new hospitalizations per day
+              </Typography>
+            ) : null}
+          </div>
           {data.latest.positive && data.latest.total ? (
             <Typography variant="caption">
               Out of the {data.latest.total} people tested, {(data.latest.positive / data.latest.total * 100).toFixed(2)}% were positive. At this point, {data.percentageInfected.toFixed(2) }% of {data.name}'s population has contracted Covid-19, (based on a population of {formatPopulation(data.population)} according to the {data.populationCensusYear || 2020} census). {data.hospitalBeds && data.latest.hospitalized && `${(data.latest.hospitalized / data.hospitalBeds * 100).toFixed(2)}% of the estimated ${data.hospitalBeds} hospital beds are needed for Covid-19 patients.`}

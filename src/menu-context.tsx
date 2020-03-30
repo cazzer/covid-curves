@@ -2,8 +2,6 @@ import React, { createContext, useState } from 'react'
 
 type scale = 'fit' | 'even'
 interface ContextType {
-  query: string
-  setQuery: Function
   scale: scale
   toggleScale: Function
 }
@@ -11,7 +9,6 @@ interface ContextType {
 export const MenuContext = createContext({} as ContextType)
 
 export const Provider = props => {
-  const [ query, setQuery ] = useState('')
   const [ scale, setScale ] = useState('fit' as scale)
 
   function toggleScale() {
@@ -20,8 +17,6 @@ export const Provider = props => {
 
   return (
     <MenuContext.Provider value={{
-      query,
-      setQuery,
       scale,
       toggleScale
     }}>
