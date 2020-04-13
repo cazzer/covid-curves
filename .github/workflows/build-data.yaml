@@ -36,3 +36,7 @@ jobs:
         git config --local user.email "caleb+github+action@cazzer.io"
         git config --local user.name "Caleb Brewer"
         git commit -m "rebuilding data [from action]" -a
+
+    - uses: mikeal/publish-to-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.action_token }}
