@@ -1,0 +1,34 @@
+name: 'Rebuild data'
+description: 'Rebuilds data from the COVID project API'
+author: 'COVID curves'
+on:
+  schedule:
+    - cron:  '0 */3 * * *'
+jobs:
+  rebuild-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get new data
+      run: yarn build-data
+
+    - uses: technote-space/get-diff-action@v1
+      with:
+        PREFIX_FILTER: |
+          src/data
+
+    - name: Install
+      run: yarn
+      if: env.GIT_DIFF
+
+    - name: Rebuild dist
+      run: yarn build
+
+    - name: Commit files
+      if: env.GIT_DIFF
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "rebuilding data [from action]" -a
