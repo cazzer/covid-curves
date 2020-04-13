@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 import InputBase from '@material-ui/core/InputBase'
 import SettingsOverscan from '@material-ui/icons/SettingsOverscan'
 import SearchIcon from '@material-ui/icons/Search'
-import GithubIcon from '@material-ui/icons/Github'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { MenuContext } from './menu-context'
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     search: {
-      flexGrow: '1',
+      flexGrow: 1,
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -160,7 +159,7 @@ export default function Menu() {
           <IconButton
             className={classes.menuButton}
           >
-            <GithubIcon />
+            Github
           </IconButton>
         </Link>
       </Toolbar>
