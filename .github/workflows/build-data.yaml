@@ -4,12 +4,18 @@ author: 'COVID curves'
 on:
   schedule:
     - cron:  '0 */3 * * *'
+  on:
+    watch
+      types: [started]
 jobs:
   rebuild-data:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Enter working directory
+      run: cd /github/workspace
 
     - name: Get new data
       run: yarn build-data
