@@ -15,19 +15,18 @@ jobs:
       run: yarn build-data
 
     - uses: technote-space/get-diff-action@v1
-      with:
-        PREFIX_FILTER: |
-          src/data
+      id: git_diff
 
     - name: Install
       run: yarn
-      if: env.GIT_DIFF
+      if: steps.git_diff.outputs.diff
 
     - name: Rebuild dist
       run: yarn build
+      if: steps.git_diff.outputs.diff
 
     - name: Commit files
-      if: env.GIT_DIFF
+      if: steps.git_diff.outputs.diff
       run: |
         git config --local user.email "caleb+github+action@cazzer.io"
         git config --local user.name "Caleb Brewer"
