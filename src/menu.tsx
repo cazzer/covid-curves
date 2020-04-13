@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import InputBase from '@material-ui/core/InputBase'
 import SettingsOverscan from '@material-ui/icons/SettingsOverscan'
 import SearchIcon from '@material-ui/icons/Search'
+import CodeIcon from '@material-ui/icons/Code'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { MenuContext } from './menu-context'
@@ -156,11 +157,14 @@ export default function Menu() {
         </div>
         <Scale />
         <Link href="https://github.com/cazzer/covid-curves">
-          <IconButton
-            className={classes.menuButton}
-          >
-            Github
-          </IconButton>
+          <Tooltip title="Source on Github">
+            <IconButton
+              className={classes.menuButton}
+            >
+
+              <CodeIcon />
+            </IconButton>
+          </Tooltip>
         </Link>
       </Toolbar>
     </AppBar>
