@@ -1,6 +1,4 @@
 name: 'Rebuild data'
-description: 'Rebuilds data from the COVID project API'
-author: 'COVID curves'
 on:
   schedule:
     - cron:  '0 */3 * * *'
