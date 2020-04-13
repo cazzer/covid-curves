@@ -11,9 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Enter working directory
-      run: cd /github/workspace
-
     - name: Get new data
       run: yarn build-data
 
