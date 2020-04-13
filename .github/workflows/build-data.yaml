@@ -4,9 +4,8 @@ author: 'COVID curves'
 on:
   schedule:
     - cron:  '0 */3 * * *'
-  on:
-    watch
-      types: [started]
+  watch
+    types: [started]
 jobs:
   rebuild-data:
     runs-on: ubuntu-latest
