@@ -2,8 +2,7 @@ name: 'Rebuild data'
 on:
   schedule:
     - cron:  '0 */3 * * *'
-  watch:
-    types: [started]
+
 jobs:
   rebuild-data:
     runs-on: ubuntu-latest
