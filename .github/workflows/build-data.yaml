@@ -29,6 +29,6 @@ jobs:
     - name: Commit files
       if: env.GIT_DIFF
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "caleb+github+action@cazzer.io"
+        git config --local user.name "Caleb Brewer"
         git commit -m "rebuilding data [from action]" -a
