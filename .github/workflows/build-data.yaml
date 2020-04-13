@@ -14,11 +14,13 @@ jobs:
     - name: Get new data
       run: yarn build-data
 
-    - name: Install
-      run: yarn
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: install
 
-    - name: Rebuild dist
-      run: yarn build
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: build
 
     - name: Commit files
       run: |
