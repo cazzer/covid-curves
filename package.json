@@ -8,7 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.46",
     "@sentry/browser": "^5.15.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-is": ">= 16.8.0",
